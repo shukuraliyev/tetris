@@ -34,19 +34,23 @@ public class Game implements Runnable{
     private State gameState;
     private State menuState;
     
+    private KeyManager keyManager; 
+    
     public Game(String title,int width,int heigth){
         
         this.width = width;
         this.heigth = heigth;
-        this.title = title;    
+        this.title = title;  
+        keyManager = new KeyManager();
     }
     
     private void init(){
         display = new Display( title, width, heigth);
+        display.getFrame().addKeyListener(keyManager);
         Assets.init();
         
-        gameState = new GameState();
-        menuState = new MenuState();
+        gameState = new GameState(this);
+        menuState = new MenuState(this);
         State.setState(gameState);
         
     }
@@ -54,6 +58,8 @@ public class Game implements Runnable{
     int x = 0;
     
     private void tick(){
+        keyManager.tick();
+        
         if(State.getState() != null)
             State.getState().tick();
     }
@@ -70,7 +76,7 @@ public class Game implements Runnable{
         g.clearRect(0, 0, width, heigth);        
         //Draw Here!
         
-        g.drawImage(Assets.grass,x,10,null);
+        //g.drawImage(Assets.grass,x,10,null);
         if(State.getState() != null)
             State.getState().render(g);
         
@@ -110,6 +116,10 @@ public class Game implements Runnable{
             }
         }
         stop();
+    }
+    
+    public KeyManager getKeyManager(){
+        return keyManager;
     }
     
     public synchronized void start(){

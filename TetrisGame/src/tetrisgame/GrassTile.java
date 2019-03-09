@@ -5,24 +5,17 @@
  */
 package tetrisgame;
 
-import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 /**
  *
  * @author Shukur
  */
-public class MenuState extends State{
+public class GrassTile  extends Tile {
     
-    public MenuState(Game game){
-        super(game);
-    }
-    
-    public void tick(){
+    public GrassTile( int id){
+        super(Assets.grass,id);
         
-    }
-    
-    public void render(Graphics g){
-        g.drawImage(Assets.dirt,10,10,null);
     }
     
 }

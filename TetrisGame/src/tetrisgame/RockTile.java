@@ -5,24 +5,19 @@
  */
 package tetrisgame;
 
-import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 /**
  *
  * @author Shukur
  */
-public class MenuState extends State{
+public class RockTile extends Tile{
     
-    public MenuState(Game game){
-        super(game);
+    public RockTile( int id){
+        super(Assets.stone, id);
     }
     
-    public void tick(){
-        
+    public boolean isSolid(){
+        return true;
     }
-    
-    public void render(Graphics g){
-        g.drawImage(Assets.dirt,10,10,null);
-    }
-    
 }
